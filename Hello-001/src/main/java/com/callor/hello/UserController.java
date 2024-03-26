@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.callor.hello.models.UserDto;
+
 /*
  * Spring 의 routing
  * Spring 에서는 Routing 을 Controller 라고 한다.
@@ -46,6 +48,23 @@ public String  login() {
 		model.addAttribute("username",username);
 		model.addAttribute("password",password);
 		// return user/login
+		return null;
+	}
+	
+	@RequestMapping(value="/join", method=RequestMethod.GET)
+	public String join() {
+		return null;
+	}
+	
+//	@RequestMapping(value="join", method=RequestMethod.POST)
+//	public String join(String username, String password, String name, String email, String tel) {
+//		return null;
+//	}
+	// 위 와 같음
+	@RequestMapping(value="join", method=RequestMethod.POST)
+	// Dto를 매개변수로 받으면 같은이름을 모두 받을수 있다
+	public String join(UserDto userDto, Model model) {
+		model.addAttribute("USER",userDto);
 		return null;
 	}
 }

@@ -14,8 +14,8 @@
 		<div><input type="submit" value="로그인"/></div>
 	</form>
 	<div>
-		<p> ${username} </p>
-		<p> ${password} </p>
+		<p>${username}
+		<p>${password}
 	</div>
 </body>
 </html>

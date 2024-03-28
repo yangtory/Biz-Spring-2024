@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <encoder >
-            <Pattern>[%-5level] - %msg%n</Pattern>
-        </encoder>
-    </appender>
-    <!-- 적용하는 프로젝트의  Base Package를 설정 -->
-    <logger name="com.callor.hello" level="DEBUG" />
-    <root level="INFO">
-        <appender-ref ref="STDOUT"/>
-    </root>
+	<appender name="STDOUT"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<Pattern>[%-5level] %c{5} - %msg%n</Pattern>
+		</encoder>
+	</appender>
+	<logger name="org.mybatis" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	
+	<!-- 적용하는 프로젝트의 Base Package를 설정 -->
+	<logger name="com.callor.hello" level="DEBUG" additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
 </configuration>

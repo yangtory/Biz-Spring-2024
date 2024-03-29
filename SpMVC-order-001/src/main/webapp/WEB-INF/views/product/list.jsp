@@ -34,7 +34,7 @@
 					<th>SEQ</th>
 					<th>상품코드</th>
 					<th>상품이름</th>
-					<th>카테고리</th>
+					<th>품목</th>
 					<th>상품가격</th>
 				</tr>
 			</thead>

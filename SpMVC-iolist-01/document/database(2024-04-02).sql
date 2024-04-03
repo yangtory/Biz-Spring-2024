@@ -1,7 +1,7 @@
 -- iolist 
 
 CREATE DATABASE iolistDB2;
-
+USE iolistDB2;
 CREATE TABLE tbl_iolist(
 io_seq	BIGINT PRIMARY KEY AUTO_INCREMENT,
 io_date	VARCHAR(10)	NOT NULL,

@@ -5,6 +5,11 @@ table.iolist {
   margin: 10px auto;
   border-collapse: separate;
   background-color: #eee;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  padding: 5px;
 }
 
 table.iolist th,
@@ -15,9 +20,8 @@ table.iolist td {
   border-bottom: 1px solid #777;
   border-top: 1px solid white;
 }
-
-table.iolist th {
-  color: blue;
+text table.iolist th {
+  color: #3f5c3f;
 }
 
 div.iolist.btn_box {
@@ -28,8 +32,7 @@ div.iolist.btn_box {
   a {
     display: inline-block;
     padding: 12px 16px;
-    background-color: blue;
-    color: white;
+    background-color: #d1d37a;
     border-radius: 10px;
 
     &:hover {

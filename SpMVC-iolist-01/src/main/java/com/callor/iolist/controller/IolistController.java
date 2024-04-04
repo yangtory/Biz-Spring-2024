@@ -8,13 +8,18 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.callor.iolist.models.IolistVO;
+import com.callor.iolist.models.UserVO;
 import com.callor.iolist.persistance.IolistDao;
+import com.callor.iolist.utils.NamesValue;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,7 +43,20 @@ public class IolistController {
 	}
 	
 	@RequestMapping(value="/insert", method=RequestMethod.GET)
-	public String insert(Model model) {
+	public String insert(Model model,HttpSession httpSession) {
+		/*
+		 * HttpSession 에 저장된 session 정보는 type 이 Object 이다
+		 * 그래서 실제 상황에서는 필요한 객체 type 으로 Casting(형변환)을 해야한다.
+		 * 
+		 * float num1 = 10;
+		 * int num2 = (int)num1; 
+		 */
+		// 사용자가 매입매출추가를 했을때 
+		// 로그인이 되어있는지 확인 후 error 메세지 전달하는 방법
+		UserVO userVO = (UserVO) httpSession.getAttribute(NamesValue.SESSION.USER);
+		if(userVO == null) {
+			return "redirect:/user/login?error=needs";
+		}
 		
 		// 날짜와 관련된 java 1.8 이전버전의 클래스
 		Date today = new Date();
@@ -70,16 +88,50 @@ public class IolistController {
 		model.addAttribute("BODY","IOLIST_INPUT");
 		return "layout";
 	}
-	
-	@RequestMapping(value="/insert", method=RequestMethod.POST)
-	public String insert(IolistVO iolistVO,Model model) {
+
+	/*
+	 * POST /insert 와 POST /update/seq 로 요청이 들어오면
+	 * 모두 처리하는 method 
+	 */
+	@RequestMapping(value={"/insert", "/update/{seq}"}, method=RequestMethod.POST)
+	// required = name 은 필수아님, 없으면 value = ""
+	public String insertOrUpdate(@PathVariable(name = "seq", required = false, value = "")
+	String seq,IolistVO iolistVO,Model model) {
+		if(seq != null) {
+			iolistVO.setIo_seq(Long.valueOf(seq));
+		}
 		log.debug(iolistVO.toString());
-		int result = iolistDao.insert(iolistVO);
+		int result = iolistDao.insertOrUpdate(iolistVO);
 		if(result > 0) {
 			return "redirect:/iolist/"; 			
 		} else {
 			model.addAttribute("BODY","IOLIST_INPUT");
 			return "layout";
 		}
+	}
+	
+	@RequestMapping(value="/detail/{seq}",method=RequestMethod.GET)
+	public String detail(@PathVariable("seq")String seq,Model model) {
+		Long io_seq = Long.valueOf(seq);
+		IolistVO vo = iolistDao.findBySeq(io_seq);
+		model.addAttribute("IO",vo);
+		model.addAttribute("BODY","IOLIST_DETAIL");
+		return "layout";
+	}
+	
+	@RequestMapping(value="/update/{seq}",method=RequestMethod.GET)
+	public String update(@PathVariable("seq")String seq, Model model) {
+		Long io_seq = Long.valueOf(seq);
+		IolistVO vo = iolistDao.findBySeq(io_seq);
+		model.addAttribute("IO",vo);
+		model.addAttribute("BODY","IOLIST_INPUT");
+		return "layout";
+	}
+	
+	@RequestMapping(value="/delete/{seq}", method=RequestMethod.GET)
+	public String delete(@PathVariable("seq")String seq, Model model) {
+		Long io_seq = Long.valueOf(seq);
+		int ret = iolistDao.delete(io_seq);
+		return "redirect:/iolist";
 	}
 }

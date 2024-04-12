@@ -15,7 +15,10 @@
 			username-parameter="u_name"
 			password-parameter="u_password"
 			login-processing-url="/user/login"
+			default-target-url="/"
 		/>
+		
+		
 		<sec:logout
 			logout-success-url="/"
 			invalidate-session="true"
@@ -28,6 +31,8 @@
 		<sec:intercept-url pattern="/user/join" access="isAnonymous()"/>
 		<sec:intercept-url pattern="/admin" access="hasRole('ADMIN')"/>
 		<sec:intercept-url pattern="/**" access="permitAll()"/>
+		
+		<sec:access-denied-handler error-page="/auth/denied"/>
 	</sec:http>
 	
 	<sec:authentication-manager>

@@ -9,23 +9,18 @@
   <head>
     <meta charset="UTF-8" />
     <title>Insert title here</title>
+    <script>
+    	const rootPath = "${rootPath}"
+    </script>
+    <script src="${rootPath }/static/js/user.js?2024-04-15-001"></script>
   </head>
   <body>
     <h1>회원가입 및 로그인 구현</h1>
-    <ul>
-    	<li>Home
-    	<sec:authorize access="isAnonymous()">
-	    	<li><a href="${rootPath }/user/join">회원가입</a>
-    		<li><a href="${rootPath }/user/login">로그인</a>
-    	</sec:authorize>
-    	<sec:authorize access="isAuthenticated()">
-    		<li>
-    			<a href="${rootPath }/user/mypage">
-    				<sec:authentication property="principal.username"/>
-    			</a>
-    		</li>
-    		<li>로그아웃
-    	</sec:authorize>
-    </ul>
+    <f:form class="join">
+    	<div><input placeholder="USERNAME" name="u_name"></div>
+    	<div><input placeholder="PASSWORD" name="u_password"></div>
+    	<div><input placeholder="RE PASSWORD" name="re_password"></div>
+    	<div><button type="button">회원가입</button></div>
+    </f:form>
   </body>
 </html>

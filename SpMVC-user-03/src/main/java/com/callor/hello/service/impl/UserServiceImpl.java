@@ -6,7 +6,9 @@ import java.util.List;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.callor.hello.dao.RoleDao;
@@ -18,13 +20,19 @@ import com.callor.hello.service.UserService;
 @Service
 public class UserServiceImpl implements UserService {
 	
+	private final PasswordEncoder passwordEncoder;
 	private final UserDao userDao;
 	private final RoleDao roleDao;
-	public UserServiceImpl(UserDao userDao, RoleDao roleDao) {
+	
+	public UserServiceImpl(
+			@Qualifier("passEncorderV1") PasswordEncoder passwordEncoder, 
+			UserDao userDao, RoleDao roleDao) {
+		super();
+		this.passwordEncoder = passwordEncoder;
 		this.userDao = userDao;
 		this.roleDao = roleDao;
 	}
-	
+
 	/*
 	 * 회원가입 절차
 	 * 1. 기존에 가입된 회원이 있을까?
@@ -35,8 +43,16 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO createUser(UserVO createUserVO) {
 		String username = createUserVO.getUsername();
+		String password = createUserVO.getPassword();
 		
 		List<UserVO> userList = userDao.selectAll();
+		
+		// 회원가입 시 입력한 password 를 암호화 하기
+		String encPassword = passwordEncoder.encode(password);
+		// 암호화된 password 를 set 해주기 
+		createUserVO.setPassword(encPassword);
+		
+		
 		
 		List<RoleVO>roles = new ArrayList<>();
 		// size <= 0 이 안전한 코드이다 ==0 보다

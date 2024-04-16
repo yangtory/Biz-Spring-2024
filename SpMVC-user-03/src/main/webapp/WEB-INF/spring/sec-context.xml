@@ -25,7 +25,13 @@
 			password-parameter="u_password"
 			default-target-url="/"
 		/>	
-		<sec:logout logout-url="/user/logout"/>
+		
+		<!-- logout-success-url : 됏으면 처음화면으로 가 -->
+		<sec:logout 
+			logout-url="/user/logout"
+			logout-success-url="/"
+		/>
+		<sec:access-denied-handler error-page="/auth/denied"/>
 	</sec:http>
 
 	<!-- login 이 완료되면 실행됨 
@@ -34,5 +40,9 @@
 	<sec:authentication-manager>
 		<sec:authentication-provider ref="authProviderImpl"/>
 	</sec:authentication-manager>
+	
+	<bean id="passEncorder" 
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	</bean>
 
 </beans>

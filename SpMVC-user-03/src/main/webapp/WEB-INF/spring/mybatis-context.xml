@@ -24,5 +24,14 @@
 		<constructor-arg ref="sessionFactory" />
 	</bean>
 	
+	<!-- spring jdbc 를 사용하여 transaction 자동화 하기 설정 -->
+	<!--  단 mybatis-context.xml 이 root 영역에 있을때는
+	servelet-context.xml 에 proxy... 을 true로 설정해 준다
+	 -->
+	<tx:annotation-driven/>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="ds"/>
+	</bean>
+	
 	<mybatis-spring:scan base-package="com.callor.hello.dao"/>
 </beans>

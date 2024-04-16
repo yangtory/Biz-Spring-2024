@@ -7,7 +7,7 @@
 
 	<insert id="insert">
 		INSERT INTO tbl_users(username,password,email)
-		VALUES(#{useranme},#{password},#{email})
+		VALUES(#{username},#{password},#{email})
 	</insert>
 	
 	<update id="update"></update>

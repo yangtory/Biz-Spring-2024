@@ -14,6 +14,8 @@
     <h1>회원가입 및 로그인 구현</h1>
     <ul>
     	<li>Home
+    	<li><a href="${rootPath }/admin">Admin Page</a>
+    	
     	<sec:authorize access="isAnonymous()">
 	    	<li><a href="${rootPath }/user/join">회원가입</a>
     		<li><a href="${rootPath }/user/login">로그인</a>
@@ -24,7 +26,7 @@
     				<sec:authentication property="principal.username"/>
     			</a>
     		</li>
-    		<li>로그아웃
+    		<li><f:form action="${rootPath }/user/logout" onclick="this.submit()">로그아웃</f:form></li>
     	</sec:authorize>
     </ul>
   </body>

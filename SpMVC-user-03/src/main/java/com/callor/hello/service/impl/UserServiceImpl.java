@@ -94,6 +94,22 @@ public class UserServiceImpl implements UserService {
 		userDao.create_role_table(null);
 	}
 
-
-
+	/*
+	 * Controller 에서 Dao 를 통하여 User 정보를 조회 할수도 있지만
+	 * 그러려면 Controller 에 UserDao 객체를 선언하고 주입받아야 한다
+	 * 
+	 * 여러곳에서 객체를 주입받는 것도 메모리 낭비가 될 수 있다
+	 * 어차피 Controller 에서는 UserService 를 주입받고 있고
+	 * UserService 에서는 UserDao 를 가지고 있으니
+	 * UserService 에 method 하나를 생성하여 사용하는게 
+	 * 메모리 관리에 다소 유리하다
+	 * 
+	 * UserDao.findById() method 를 호출하고 return 값을 
+	 * Controller 에게 toss 만 하도록 함
+	 */
+	// controller로 보내주는 역할만 하기
+	@Override
+	public UserVO findById(String username) {
+		return userDao.findById(username);
+	}
 }

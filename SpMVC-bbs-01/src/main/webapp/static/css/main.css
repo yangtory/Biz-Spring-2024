@@ -1,0 +1,27 @@
+@charset "UTF-8";
+
+header.gallery {
+  text-align: center;
+  padding: 8px;
+  display: flex;
+  div {
+    margin-left: auto;
+  }
+}
+
+nav.gallery {
+  background-color: black;
+  ul {
+    list-style: none;
+    display: flex;
+    li {
+      margin: 3px 12px;
+      color: #e9e91e;
+    }
+  }
+}
+
+button.upload {
+  background-color: #1163ce;
+  color: white;
+}

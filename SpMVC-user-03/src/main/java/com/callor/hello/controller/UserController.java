@@ -1,8 +1,10 @@
 package com.callor.hello.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.callor.hello.models.UserVO;
 import com.callor.hello.service.UserService;
@@ -15,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 public class UserController {
 	
 	private final UserService userService;
-	
 	public UserController(UserService userService) {
 		this.userService = userService;
 	}
@@ -34,6 +35,16 @@ public class UserController {
 	
 	@RequestMapping(value="login", method=RequestMethod.GET)
 	public String login() {
+		return null;
+	}
+	
+	// @ResponsBody 가 붙으면 rendering 하지 않고 문자열을 그대로 보낸다
+	@ResponseBody
+	@RequestMapping(value="/idcheck/{username}")
+	public String idcheck(@PathVariable("username") String username) {
+		UserVO  userVO = userService.findById(username);
+		// username 사용자이름이 가입되지 않았다
+		if(userVO == null) return "OK";
 		return null;
 	}
 	

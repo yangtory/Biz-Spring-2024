@@ -3,17 +3,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
    
-<header class="gallery">
-	<h1>이미지 겔러리 2024</h1>
-	<div>
-		<a>로그인</a>
-		<a>회원가입</a>
-	</div>
-</header>
-<nav class="gallery">
-	<ul>
-		<li>Home
-		<li>공지사항
-		<li>자유게시판
-	</ul>
-</nav>
+<h1>나는 BBS 왼쪽 Box 야!</h1>
+<a class="write_btn" href="${rootPath }/bbs/write">글쓰기</a>

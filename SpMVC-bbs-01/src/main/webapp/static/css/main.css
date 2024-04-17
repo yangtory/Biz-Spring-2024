@@ -1,11 +1,20 @@
 @charset "UTF-8";
 
 header.gallery {
-  text-align: center;
-  padding: 8px;
+  padding: 1.8rem;
   display: flex;
+  align-items: center;
+  justify-content: center;
+  h1 {
+    color: black;
+    margin-left: auto;
+  }
   div {
     margin-left: auto;
+    a {
+      margin: 0 5px;
+      font-weight: 800;
+    }
   }
 }
 
@@ -14,14 +23,24 @@ nav.gallery {
   ul {
     list-style: none;
     display: flex;
+    padding: 8px;
     li {
-      margin: 3px 12px;
-      color: #e9e91e;
+      margin: 3px 8px;
+      padding: 0 4px;
+      color: white;
+      &:hover {
+        cursor: pointer;
+        color: yellow;
+      }
     }
   }
 }
 
-button.upload {
-  background-color: #1163ce;
+a.write_btn {
+  padding: 5px 16px;
+  margin: 8px;
+  font-weight: 800;
+  border-radius: 10px;
+  background-color: #1b77ce;
   color: white;
 }

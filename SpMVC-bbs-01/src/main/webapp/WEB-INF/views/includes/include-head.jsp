@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<title>이미지 겔러리 2024</title>
+<title>이미지 갤러리 2024</title>
 <style>
 * {
 	box-sizing: border-box;
@@ -28,5 +28,5 @@ a {
 	color: inherit;
 }
 </style>
-<link rel="stylesheet"	href="${rootPath}/static/css/main.css?2024-04-17-003">
+<link rel="stylesheet"	href="${rootPath}/static/css/main.css?2024-04-17-016">
 </head>

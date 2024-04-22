@@ -18,5 +18,7 @@ public class BBsNoticeController {
 	public String write() {
 		return null;
 	}
+	
+
 
 }

@@ -14,7 +14,10 @@
 	<!-- default 를 상속 -->
 	<!-- Controller 에서 retrun"home" 이 요청 되면 상속된거 들고 와 -->
 	<definition name="home" extends="default">
-		<put-attribute name="content" value=""/>
+		<put-attribute name="content" value="/WEB-INF/views/gallery/list.jsp"/>
+	</definition>
+	<definition name="gallery/insert" extends="default">
+		<put-attribute name="content" value="/WEB-INF/views/gallery/input.jsp"/>
 	</definition>
 
 </tiles-definitions>

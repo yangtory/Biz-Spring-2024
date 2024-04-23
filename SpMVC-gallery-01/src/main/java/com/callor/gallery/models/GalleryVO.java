@@ -1,4 +1,4 @@
-package com.callor.gallery.controller.models;
+package com.callor.gallery.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

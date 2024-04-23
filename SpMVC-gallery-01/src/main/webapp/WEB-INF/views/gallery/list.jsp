@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set var="rootPath" value="${pageContext.request.contextPath}" />
 <link rel="stylesheet" href="${rootPath }/static/css/gallery.css?04-22-001">
+<link rel="stylesheet" href="${rootPath }/static/css/gallery_list.css?04-23-002">
 
 <section class="gallery">
 	<article class="gallery">
@@ -11,7 +12,7 @@
 	<article class="gallery">
 		<c:forEach items="${GALLERYS }" var="GA">
 			<div class="gallery card">
-				<img src="${rootPath }/static/images/tree.png" width=200px alt="${GA.g_subject }" />
+				<img src="${GA.g_image }" width=200px alt="${GA.g_subject }" />
 				<div>
 					<p>${GA.g_subject }
 				</div>

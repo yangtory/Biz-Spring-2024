@@ -4,13 +4,60 @@ document.addEventListener("DOMContentLoaded", () => {
   const imgBorderBox = document.querySelector("div.image");
   const base64Box = document.querySelector("textarea.base64");
 
+  /*
+    업로드할 이미지를 base64 방식으로 encoding 하는 함수
+    base64 제약사항
+    파일 크기가 크다
+    jpeg 는 다소 양호하나 png 나 벡터 타입은 이슈가 있다
+    파일의 크기 문제로 업로드, 데이터, DB 저장 등에서 문제를 일으킬수 있다
+    다만, DB 에 파일을 저장함으로써 별도의 이미지를 보관하는 방식에 비해 유리한 점도 있다.
+
+    base64 로 변환된 파일을 압축하여, jpeg 로 변환하면 용량문제를 다소 해결할 수 있다.
+  */
   const encodeImageFileAsBase64 = async (image) => {
     //fileReader 무조건 비동기, Promise : 비동기 코드를 동기식으로 바꿔주는 객체
     return new Promise((resolve, _) => {
       const reader = new FileReader();
       reader.onloadend = () => {
         // resolve :  여기있는 함수가 모두 끝났을때 (reader.result)을 return 한다
-        resolve(reader.result);
+
+        // Image() : 이미지를 그리는 도구
+        const myImage = new Image();
+        const imageBase64 = reader.result;
+        myImage.src = imageBase64;
+        myImage.onload = (e) => {
+          /*
+            Image 객체 (myImage) 가 load 되면 
+            화면에 2d 가상 canvas 를 생성
+            그 canvas 에 myImage 에 담긴 이미지를 그려라
+          */
+          //가상의 캔바스태그 만들기
+          const myCanvas = document.createElement("canvas");
+          // 2d 이미지를 그리겟음
+          const context = myCanvas.getContext("2d");
+          // 그려줄 이미지 크기만큼 canvas 크기 지정하기
+          myCanvas.width = e.target.width;
+          myCanvas.height = e.target.height;
+          // e.target : reader.result, (0,0) : 박스에 가득 채워 그리기
+          context.drawImage(e.target, 0, 0);
+          // canvas 에 그려진 이미지를 jpeg 로 변환하고 크기를 0.5 배 만큼 줄여라
+          let point = 0.5;
+          let reSizeImage = myCanvas.toDataURL("image/jpeg", point);
+          const imageSize = 2 * 1024 * 1024; // 2MB
+          // 압축한 이미지 크기가 2mb 보다 크면 작아질때까지 일정 비율만큼(0.01) 돌려버리기
+          while (reSizeImage.length > imageSize) {
+            if (point < 0.01) {
+              break;
+            }
+            point -= 0.001; // 이 만큼씩 줄이기
+            reSizeImage = myCanvas.toDataURL("image/jpeg", point);
+          }
+          if (reSizeImage.length > imageSize) {
+            alert("이미지가 너무 커서 업로드 할수 없습니다");
+            return false;
+          }
+          resolve(reSizeImage);
+        };
       };
       reader.readAsDataURL(image);
     });

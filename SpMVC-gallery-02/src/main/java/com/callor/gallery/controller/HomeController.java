@@ -1,4 +1,4 @@
-package com.callor.gallery;
+package com.callor.gallery.controller;
 
 
 import java.util.List;
@@ -27,8 +27,8 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
 		List<GalleryVO> gList = galleryDao.selectAll();
-		model.addAttribute("GALLERY", gList);
-		return "home";
+		model.addAttribute("GALLERYS", gList);
+		return "gallery/list";
 	}
 	
 }

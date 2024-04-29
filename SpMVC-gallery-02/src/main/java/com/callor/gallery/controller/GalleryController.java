@@ -56,6 +56,7 @@ public class GalleryController {
 	 */
 	@RequestMapping(value="/insert",method=RequestMethod.POST)
 	public String insert(GalleryVO galleryVO,
+			// single 파일은 requestParam 붙이기
 			@RequestParam("image_file") MultipartFile image_file,
 			MultipartHttpServletRequest image_files,
 			Model model) {

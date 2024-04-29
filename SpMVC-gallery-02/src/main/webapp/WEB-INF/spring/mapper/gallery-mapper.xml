@@ -6,27 +6,46 @@
 <mapper namespace="com.callor.gallery.dao.GalleryDao">
 
 	<select id="selectAll">
-		SELECT * FROM tbl_gallerys ORDER BY g_date DESC, g_time DESC
+		SELECT * FROM tbl_gallerys ORDER BY g_date DESC,
+		g_time DESC
 	</select>
-	<select id="findById"></select>
-	<insert id="insert">
+	<select id="findById">
+		SELECT * FROM tbl_images
+		WHERE g_id = #{g_id}
+	</select>
+
+	<!-- insert 가 실행된 후 실행 select 를 한번 더 실행, SELECT LAST_INSERT() : 마지막으로 INSERT 
+		된 키 값을 가져와서 g_is 에 담아라 -->
+	<insert id="insert" parameterType="GalleryVO">
+		<selectKey resultType="String" keyProperty="g_id"
+			order="AFTER">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
 		INSERT INTO tbl_gallerys(
-			g_id,g_date,g_time,	g_author,g_subject,g_content,g_origin_image,g_up_image)
+		g_id,g_date,g_time,
+		g_author,g_subject,g_content,
+		g_origin_image,g_up_image)
 		VALUES(
-			#{g_id},#{g_date},#{g_time},#{g_author},#{g_subject},#{g_content},#{g_origin_image},#{g_up_image})
+		#{g_id},#{g_date},#{g_time},
+		#{g_author},#{g_subject},#{g_content},
+		#{g_origin_image},#{g_up_image})
 	</insert>
 	<update id="update"></update>
 	<delete id="delete"></delete>
 
 	<select id="create_table">
 		create table if not exists tbl_gallerys(
-		g_id VARCHAR(125) PRIMARY KEY,
+		g_id
+		VARCHAR(125) PRIMARY KEY,
 		g_date VARCHAR(10) NOT NULL ,
-		g_time VARCHAR(10) NOT NULL ,
+		g_time
+		VARCHAR(10) NOT NULL ,
 		g_author VARCHAR(50) NOT NULL,
-		g_subject VARCHAR(50) NOT NULL,
+		g_subject
+		VARCHAR(50) NOT NULL,
 		g_content VARCHAR(255) NOT NULL ,
-		g_origin_image VARCHAR(255) NOT NULL,
+		g_origin_image
+		VARCHAR(255) NOT NULL,
 		g_up_image VARCHAR(255) NOT NULL
 		);
 	</select>

@@ -7,10 +7,11 @@ console.log(NAV_INDEX.home.url) ? "/"
 console.log(NAV_INDEX["home"]) ? {url: "/"}
 */
 const NAV_INDEX = {
-  home: { url: "/" },
-  notice: { url: "/bbs/notice" },
-  free: { url: "/bbs/free" },
+  home: { url: "" },
+  notice: { url: "bbs/notice" },
+  free: { url: "bbs/free" },
 };
+
 document.addEventListener("DOMContentLoaded", () => {
   const mainNav = document.querySelector("nav.main");
   const navItems = mainNav.querySelectorAll("LI");

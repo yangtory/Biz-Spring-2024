@@ -12,6 +12,7 @@ public class UserController {
 	public String join() {
 		return null;		
 	}
+	
 	@RequestMapping(value="/login", method=RequestMethod.GET)
 	public String login() {
 		return null;		

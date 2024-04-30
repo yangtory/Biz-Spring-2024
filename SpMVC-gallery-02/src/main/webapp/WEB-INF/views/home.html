@@ -3,6 +3,7 @@
   lang="ko"
   xmlns:th="http://wwww.thymeleaf.org"
   xmlns:layout="http://ultrag.net.nz/thymeleaf/layout"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
   <head>
     <meta charset="UTF-8" />
@@ -39,12 +40,16 @@
     <header class="main">
       <h1>이미지 갤러리 2024 v2</h1>
       <div>
-        <a href="./user/login.html" th:href="@{/user/login}"
+        <a sec:authorize="isAnonymous()" href="./user/login.html" th:href="@{/user/login}"
           >로그인</a
         >
-        <a href="./user/join.html" th:href="@{/user/join}"
+        <a sec:authorize="isAnonymous()" href="./user/join.html" th:href="@{/user/join}"
           >회원가입</a
         >
+        
+        <a sec:authorize="isAuthenticated()" href="" th:href="@{/user/mypage}" 
+        >마이페이지(<span sec:authentication="principal"></span>)</a>
+        <a sec:authorize="isAuthenticated()" href="" th:href="@{/user/mypage}">로그아웃</a>
       </div>
     </header>
     <nav class="main">

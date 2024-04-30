@@ -1,0 +1,29 @@
+form.user {
+  width: 80%;
+  margin: 20px auto;
+  fieldset {
+    padding: 20px;
+    legend {
+      text-align: center;
+      padding: 10px;
+    }
+  }
+  div {
+    width: 90%;
+    margin: 5px auto;
+
+    input {
+      padding: 8px;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      outline: none;
+      width: 100%;
+      &:hover {
+        background-color: #ddd;
+      }
+      &:focus {
+        border: 2px solid #aaa;
+      }
+    }
+  }
+}

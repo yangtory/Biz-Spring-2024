@@ -9,19 +9,32 @@
 		SELECT * FROM tbl_roles
 	</select>
 	<select id="findById"></select>
-	<insert id="inserts" ></insert>
+	
+	<insert id="inserts" >
+		INSERT INTO tbl_roles(
+			r_username,	r_role 
+		) 
+		VALUES
+		<foreach collection="roles" item="VO" separator="," >
+			( #{VO.r_username}, #{VO.r_role} )
+		</foreach>
+	</insert>
+	
 	<update id="update"></update>
 	<delete id="delete"></delete>
 
 	<select id="create_table">
 		create table if not exists tbl_roles(
-			r_username VARCHAR(125) PRIMARY KEY,
-			r_role VARCHAR(125) NOT NULL,
+			r_username	VARCHAR(125),
+			r_role	VARCHAR(125) NOT NULL,
+
+			CONSTRAINT PK_ROLE
+			PRIMARY KEY (r_username,r_role),
+
 			CONSTRAINT FK_USER
 			FOREIGN KEY (r_username)
 			REFERENCES tbl_users(username)
-			ON DELETE CASCADE
-		)
+			ON DELETE CASCADE)	
 	</select>
 
 </mapper> 

@@ -71,3 +71,20 @@ Rendering 을 할 준비
 
 </tiles-definitions>
 ```
+
+- 다중 경로 Resolver
+- 만약 retrun 값이 `user/login`, `user/join`, `user/mypage`등과 같이 다중 경로의 Resolver 가 필요한 경우 와일드 카드인 애스터리스크`(*)` 를 사용하여 경로 응답을 받고, include 를 할 때 `{1}`, 와 같이 위치 기호를 사용하여 처리한다
+```xml
+<tiles-definitions>
+	
+	<definition name="user/*" extends="default">
+		<put-attribute name="content" value="/WEB-INF/views/user/{1}.jsp"/>
+	</definition>
+	
+	<definition name="user/*/*" extends="default">
+		<put-attribute name="content" value="/WEB-INF/views/user/{1}/{2}.jsp"/>
+	</definition>
+
+</tiles-definitions>
+
+```

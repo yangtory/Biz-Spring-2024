@@ -23,6 +23,7 @@
 			login-processing-url="/user/login"
 			username-parameter="username"
 			password-parameter="password"
+			default-target-url="/"
 		/>
 		<sec:logout
 			invalidate-session="true"

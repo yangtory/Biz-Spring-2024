@@ -1,6 +1,9 @@
 package com.callor.gallery.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -33,8 +36,17 @@ public class UserController {
 		return null;
 	}
 	
-	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String login() {
-		return null;		
+	@RequestMapping(value={"/login","/login/{fail}"}, method=RequestMethod.GET)
+	public String login(
+			@PathVariable(value="fail", required = false) String fail,
+			HttpSession httpSession ) {
+		
+		if(fail == null || fail.isBlank()) {
+			// 다시 로그인으로 들어왔을때 SPRING_SECURITY_LAST_EXCEPTION 이거 지워버려
+			httpSession.removeAttribute("SPRING_SECURITY_LAST_EXCEPTION");
+		}	
+		return "user/login";		
 	}
+	
+	
 }

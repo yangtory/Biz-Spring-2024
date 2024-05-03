@@ -62,11 +62,14 @@
           ></span
           >)</a
         >
-        <a
-          sec:authorize="isAuthenticated()"
-          href=""
-          th:href="@{/user/mypage}"
-          >로그아웃</a
+        <a sec:authorize="isAuthenticated()" href="javascript:void(0)"
+          ><form
+            th:action="@{/user/logout}"
+            method="post"
+            onclick="this.submit()"
+          >
+            로그아웃
+          </form></a
         >
       </div>
     </header>

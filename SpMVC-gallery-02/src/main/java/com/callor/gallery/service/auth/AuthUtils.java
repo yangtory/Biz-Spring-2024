@@ -11,6 +11,7 @@ public class AuthUtils {
 		/*
 		 * PasswordEncoder 는 비밀번호 등을 일방통행(단방향)으로 암호화를
 		 * 하기위한 도구이다.
+		 * 
 		 * 이 클래스 type encoder 객체를 통하여 회원가입을 할때 비밀번호를 암호화하고
 		 * 로그인을 할때 다시 한 번 암호문과 비교하는 method 를 사용하게 된다
 		 * 결국 프로젝트 전체를 보면 encoder 라는 객체를 두번 생성하고 사용하게 된다
@@ -29,7 +30,7 @@ public class AuthUtils {
 		 * 
 		 * 현재 AuthUtils 클래스는 @Component 가 선언되어 있고
 		 * 프로젝트가 실행될 때 현재 패키지가 스캔되고 @Bean 이 설정된 method 가 
-		 * 실행되면서 PasswordEncoder 객체가 만들어지고 Srping Container 에 보관된다
+		 * 실행되면서 PasswordEncoder 객체가 만들어지고 Spring Container 에 보관된다
 		 */
 		
 		@Bean

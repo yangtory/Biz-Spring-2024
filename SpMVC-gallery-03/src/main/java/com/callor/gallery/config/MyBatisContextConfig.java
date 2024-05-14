@@ -18,7 +18,8 @@ public class MyBatisContextConfig {
 	
 	/*
 	 * java 코드에서 /WEB-INF 또는 src/main/resources 등의 폴더에 있는
-	 * xml 등의 파일에 접근하기 위한 도구
+	 * xml 등의 파일에 접근하기 위한 도구, 내 어플리케이션의 모든 정보를 알수 잇음
+	 * configuration 에서 templete 이 필요 없다
 	 */
 	private final ApplicationContext context;
 	

@@ -32,5 +32,10 @@ public class RootContextConfig {
 		
 		return resolver;
 	}
+	
+	@Bean(name="upLoadPath")
+	public String upLoadPath() {
+		return "c:/app/upload";
+	}
 
 }

@@ -77,7 +77,7 @@ public class FileServiceImplV1 implements FileService {
 	}
 
 	@Override
-	public List<String> filesUp(MultipartHttpServletRequest files) {
+	public List<ImageVO> filesUp(MultipartHttpServletRequest files) throws Exception {
 		/*
 		 * view 의 form input[type='file'] 태그의 name 속성("files")을 통해
 		 * 파일 리스트 추출
@@ -88,12 +88,13 @@ public class FileServiceImplV1 implements FileService {
 		for(MultipartFile file : fileList) {
 			String resultName = this.fileUp(file);
 			String originName = file.getOriginalFilename();
-			ImageVO vo = ImageVO.builder()
-						.i_up_image(resultName)
-						.i_origin_image(originName)
-						.build();
-			
-			resultFiles.add(vo);
+			resultFiles.add(
+					ImageVO.builder()
+					.i_id(UUID.randomUUID().toString())
+					.i_up_image(resultName)
+					.i_origin_image(originName)
+					.build()					
+					);			
 		}
 		return resultFiles;
 	}

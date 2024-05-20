@@ -35,6 +35,7 @@ public class RootContextConfig {
 	
 	@Bean(name="upLoadPath")
 	public String upLoadPath() {
+//		return "/src/main/webapp/static/images";
 		return "c:/app/upload";
 	}
 

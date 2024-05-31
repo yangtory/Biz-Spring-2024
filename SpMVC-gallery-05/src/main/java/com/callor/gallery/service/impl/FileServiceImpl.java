@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.ServletContext;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -25,13 +27,23 @@ public class FileServiceImpl implements FileService {
 	 * 자동으로 import(DI)
 	 */
 	private final String uploadDir;
+	private final ServletContext context;
+	private String folder;
 	
-	public FileServiceImpl(String uploadDir) {
+	public FileServiceImpl(String uploadDir, ServletContext context) {
 		super();
 		this.uploadDir = uploadDir;
-		log.debug("업로드 폴더 {} ",uploadDir);
+		this.context = context;
+		folder = context.getRealPath("/app/upload");
+		log.debug("업로드 폴더 {} ",folder);
 	}
 
+//	public FileServiceImpl(String uploadDir) {
+//		super();
+//		this.uploadDir = uploadDir;
+//		log.debug("업로드 폴더 {} ",uploadDir);
+//	}
+//
 	@Override
 	public String fileUp(MultipartFile file) {
 		
@@ -39,7 +51,7 @@ public class FileServiceImpl implements FileService {
 		if(originName.isEmpty())return null;
 		
 		// 문자열 uploadDir 값을 File 객체로 생성 (변환)
-		File path = new File(uploadDir);
+		File path = new File(folder);
 		
 		// 폴더 없으면 새로 생성
 		if(!path.exists()) {
@@ -51,7 +63,7 @@ public class FileServiceImpl implements FileService {
 		String upLoadFileName = String.format("%s-%s", uuid, originName);
 		
 		// 파일을 업로드 하기 위하여 File 객체로 생성하기 
-		File uploadFile = new File(uploadDir, upLoadFileName);
+		File uploadFile = new File(folder, upLoadFileName);
 		
 		try {
 			file.transferTo(uploadFile);

@@ -15,8 +15,9 @@ import lombok.ToString;
 @Builder
 public class ImagesVO {
 	private String i_id;
+	private int i_seq;
 	private String i_gid;
-	private String i_origin_name;
+	private String i_origin_image;
 	private String i_up_image;
 
 }

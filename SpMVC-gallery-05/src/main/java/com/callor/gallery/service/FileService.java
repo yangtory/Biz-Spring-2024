@@ -15,4 +15,6 @@ public interface FileService {
 	// multi file
 	public List<ImagesVO> filesUp(MultipartHttpServletRequest files);
 
+	public void fileDelete(String i_up_image);
+
 }

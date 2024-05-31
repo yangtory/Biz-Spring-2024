@@ -71,16 +71,31 @@ public class FileServiceImpl implements FileService {
 		
 		List<MultipartFile> fileList = files.getFiles(Names.FILES);
 		List<ImagesVO> images = new ArrayList<>();
-		
+		int index = 0;
 		for(MultipartFile file : fileList) {
 		String resultFileName = this.fileUp(file);
 		ImagesVO vo = ImagesVO.builder()
+				.i_seq(index++)
+				.i_id(UUID.randomUUID().toString())
 				.i_up_image(resultFileName)
-				.i_origin_name(file.getOriginalFilename())
+				.i_origin_image(file.getOriginalFilename())
 				.build();
 		images.add(vo);
 		}
 		return images;
+		
+	}
+
+	@Override
+	public void fileDelete(String i_up_image) {
+		
+		// 파일에 있는 사진을 먼저 삭제하기위해
+		File deleteFile = new File(uploadDir, i_up_image);
+		
+		// 파일이 있으면
+		if(deleteFile.exists()) {
+			deleteFile.delete();
+		}
 		
 	}
 

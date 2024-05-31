@@ -30,6 +30,8 @@ public class FileUploadServiceImpl implements FileUploadService {
 		this.context = context;
 		// tomcat 폴더가 아닌 server 의 로컬 스토리지의 임의의 폴더
 		folder = "/app/upload";
+		// 톰캣서버에 폴더 만들때
+//		folder = context.getRealPath("/app/upload");
 	}
 
 	@Override

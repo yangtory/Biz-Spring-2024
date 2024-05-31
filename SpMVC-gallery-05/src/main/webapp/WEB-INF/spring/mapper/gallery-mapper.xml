@@ -24,7 +24,6 @@
 		)
 	</insert>
 	<update id="update"></update>
-	<delete id="delete"></delete>
 	<select id="create_table">
 		CREATE TABLE IF NOT EXISTS tbl_gallerys(
 			g_id VARCHAR(125) PRIMARY KEY,
